@@ -1,0 +1,29 @@
+{
+	"manifest_version": 2,
+	"name": "Bookmarks",
+	"version": "1.0",
+
+	"description": "Bookmarks add-on",
+
+	"icons": {
+	"48": "bookmark.png"
+	},
+
+	"content_scripts": [
+	{
+	"matches": ["<all_urls>"],
+	"js": ["bookmarks.js"]
+	}
+	],
+	
+	"permissions": [
+	"tabs",
+	"storage"
+	],
+
+	"browser_action": {
+	"default_popup": "popup.html",
+ 	"browser_style": true
+	}
+}
+
