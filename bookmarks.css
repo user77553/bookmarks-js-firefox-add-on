@@ -2,13 +2,14 @@ body {
     background-color: #2B2B2B;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
-    min-width: 400px;
+    min-width: 450px;
     color: white;
 }
 
 input {
     padding: 5px;
-    width: 88%;
+    margin: 5px;
+    width: 170px;
     box-sizing: border-box;
     border: 1px solid #415793;
     margin: 5px;

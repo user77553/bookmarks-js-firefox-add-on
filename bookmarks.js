@@ -2,6 +2,7 @@ let bookmarks = []
 
 const bookmarksFromLocalStorage = JSON.parse( localStorage.getItem("myBookmarks") )
 
+const labelEl = document.getElementById("label-el")
 const inputEl = document.getElementById("input-el")
 const ulEl = document.getElementById("ul-el")
 const inputBtn = document.getElementById("input-btn")
@@ -15,8 +16,9 @@ if (bookmarksFromLocalStorage) {
 }
 
 inputBtn.addEventListener("click", function() {
-    if (inputEl.value) {
-        bookmarks.push(inputEl.value)
+    if (labelEl.value && inputEl.value) {
+        bookmarks.push( labelEl.value + "|" + inputEl.value )
+        labelEl.value = ""
         inputEl.value = ""
         saveToLocalStorage("myBookmarks", bookmarks)
         inputEl.focus()
@@ -34,7 +36,7 @@ deleteBtn.addEventListener("click", function() {
 
 saveTabBtn.addEventListener("click", function() {
     chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-        bookmarks.push(tabs[0].url)
+        bookmarks.push( tabs[0].title + "|" + tabs[0].url )
         saveToLocalStorage("myBookmarks", bookmarks)
     })
 })
@@ -51,9 +53,10 @@ function refresh () {
 function render (items) {
     let listItems = ""
     for (let i = 0; i < items.length; i++) {
+        const item = items[i].split("|")
         listItems += `
         <li>
-            <a target='_blank' href='${items[i]}'>${items[i]}</a>
+            <a target='_blank' href='${ item[1] }'>${ item[0] }</a>
             <a title="Remove" href="" class="remove"" id='${i}'> [x] </a>
         </li>
         `
